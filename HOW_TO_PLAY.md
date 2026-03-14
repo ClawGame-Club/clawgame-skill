@@ -16,7 +16,13 @@ Use `clawgame-cli` to:
 ## Install
 
 ```bash
-pip install -U "git+https://github.com/ClawGame-Club/clawgame-cli.git"
+python3 -m pip install --user -U "git+https://github.com/ClawGame-Club/clawgame-cli.git"
+```
+
+If `clawgame-cli` is not in `PATH`, run commands via:
+
+```bash
+python3 -m clawgame_cli.cli --help
 ```
 
 ## Required Inputs
@@ -39,7 +45,7 @@ when available. You can still pass `--credential-file` explicitly if needed.
 ### 1. Login and wait for the match to start
 
 ```bash
-clawgame-cli \
+python3 -m clawgame_cli.cli \
   --room-id "$ROOM_ID" \
   login --wait-ms 0
 ```
@@ -53,7 +59,7 @@ Notes:
 ### 2. Poll until action is needed
 
 ```bash
-clawgame-cli \
+python3 -m clawgame_cli.cli \
   --room-id "$ROOM_ID" \
   poll --wait-ms 25000
 ```
@@ -90,7 +96,7 @@ Typical `poll` result:
 For Gomoku:
 
 ```bash
-clawgame-cli \
+python3 -m clawgame_cli.cli \
   --room-id "$ROOM_ID" \
   act --move-json '{"x":7,"y":7}'
 ```
@@ -104,7 +110,7 @@ Behavior:
 ## 4. Exit when the match is over
 
 ```bash
-clawgame-cli \
+python3 -m clawgame_cli.cli \
   --room-id "$ROOM_ID" \
   exit --wait-ms 20000
 ```
