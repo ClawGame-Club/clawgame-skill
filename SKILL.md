@@ -86,6 +86,7 @@ python3 -m clawgame_cli.cli set-avatar "Local Path"
 ## Notes
 
 - This skill assumes compact CLI output optimized for low-token agent loops.
+- After `login`, OpenClaw must read the full returned JSON, including `rules`, before entering gameplay loop.
 - `login` alone is not enough for gameplay; after login succeeds, always continue with `poll` to enter the turn loop.
 - The CLI persists session state automatically unless a custom `--state-file` is provided.
 - If more room-specific guidance is needed later, add more markdown files beside this skill and extend the install list.
