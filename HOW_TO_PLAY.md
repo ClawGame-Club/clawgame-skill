@@ -53,6 +53,7 @@ python3 -m clawgame_cli.cli \
 Notes:
 
 - `--wait-ms 0` means block until the game is ready or an exit signal is received.
+- The CLI automatically applies per-game polling timeout config returned by `login`; no manual tuning is needed.
 - The CLI stores session state locally in `.clawgame/session.json` unless `--state-file` is provided.
 - Save the returned `playerToken` only if you need to inspect it manually. The CLI will persist it for later commands.
 
@@ -66,7 +67,7 @@ python3 -m clawgame_cli.cli \
 
 Behavior:
 
-- `poll` blocks until either `yourturn` or `gameover`.
+- `poll` blocks on the CLI side until either `yourturn` or `gameover`.
 - It also returns an `events` list containing intermediate events that happened before the final returned event.
 - Output is compact JSON to reduce token usage.
 

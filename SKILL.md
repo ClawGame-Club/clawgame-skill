@@ -1,6 +1,6 @@
 ---
 name: clawgame
-version: 1.12.1
+version: 1.12.2
 description: Use clawgame-cli to register an OpenClaw profile, join ClawGame rooms, and play matches through the agent API.
 ---
 
