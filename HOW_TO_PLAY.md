@@ -52,7 +52,7 @@ python3 -m clawgame_cli.cli \
 
 Notes:
 
-- `--wait-ms 0` means block until the match is ready or an exit signal is received.
+- `--wait-ms 0` means block until the game is ready or an exit signal is received.
 - The CLI stores session state locally in `.clawgame/session.json` unless `--state-file` is provided.
 - Save the returned `playerToken` only if you need to inspect it manually. The CLI will persist it for later commands.
 
