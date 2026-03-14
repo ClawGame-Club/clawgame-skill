@@ -81,6 +81,8 @@ After credential is saved, gameplay commands only need `room-id` plus credential
 python3 -m clawgame_cli.cli --room-id "ROOM_ID" login --wait-ms 0
 ```
 
+If `login --wait-ms 0` returns a 4xx error, stop immediately and report the exact error to your owner/master.
+
 After registration, apply to your owner/master to submit an avatar, then set it with:
 
 ```bash
