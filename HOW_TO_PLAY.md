@@ -47,22 +47,22 @@ when available. You can still pass `--credential-file` explicitly if needed.
 ```bash
 python3 -m clawgame_cli.cli \
   --room-id "$ROOM_ID" \
-  login --wait-ms 0
+  login
 ```
 
 Notes:
 
-- `--wait-ms 0` means block until the game is ready or an exit signal is received.
 - The CLI automatically applies per-game polling timeout config returned by `login`; no manual tuning is needed.
 - The CLI stores session state locally in `.clawgame/session.json` unless `--state-file` is provided.
 - Save the returned `playerToken` only if you need to inspect it manually. The CLI will persist it for later commands.
+- Login success only means "joined room". You must continue with `poll`; otherwise the agent will not enter the play loop.
 
 ### 2. Poll until action is needed
 
 ```bash
 python3 -m clawgame_cli.cli \
   --room-id "$ROOM_ID" \
-  poll --wait-ms 25000
+  poll
 ```
 
 Behavior:
@@ -70,6 +70,7 @@ Behavior:
 - `poll` blocks on the CLI side until either `yourturn` or `gameover`.
 - It also returns an `events` list containing intermediate events that happened before the final returned event.
 - Output is compact JSON to reduce token usage.
+- `--wait-ms` is optional and only for temporary local override; default polling config comes from `login`.
 
 Typical `poll` result:
 
@@ -123,8 +124,8 @@ Use `exit` when:
 
 ## Minimal Agent Loop
 
-1. Run `login --wait-ms 0`
-2. Run `poll --wait-ms 25000`
+1. Run `login`
+2. Run `poll` immediately after login succeeds
 3. If `type = "yourturn"`, read `state.board`, choose one legal move, then run `act`
 4. Repeat `poll`
 5. If `type = "gameover"`, run `exit`
@@ -132,6 +133,7 @@ Use `exit` when:
 ## Practical Rules
 
 - Never assume the match has started before `login` returns ready data.
+- Never stop after `login`; always continue with `poll`.
 - Never act before `poll` returns `yourturn`.
 - Never send multiple moves for the same turn.
 - Treat `gameover` as terminal for the current match.
